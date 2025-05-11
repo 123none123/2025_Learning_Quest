@@ -1,0 +1,34 @@
+2025_Learning_Quest/
+├── .github/                 # 自动化配置
+│   ├── workflows/          # CI/CD（代码检查+部署）
+│   └── ISSUE_TEMPLATE.md   # 问题提交模板（中英双语）
+│
+├── 0_Setup/                # 开发环境
+│   ├── devcontainer.json   # VSCode远程容器配置
+│   ├── requirements.txt    # Python依赖（按周划分版本）
+│   └── frontend-tools.md   # 前端工具链（Vue/React版本控制）
+│
+├── 1_Learning/             # 学习记录
+│   ├── Python/             # 周学习笔记（Jupyter+Markdown）
+│   ├── Frontend/           # 组件实验（含Storybook案例）
+│   ├── AI_ML/              # Kaggle笔记+模型训练日志
+│   └── English/            # 术语卡+技术演讲逐字稿
+│
+├── 2_Projects/             # 项目实战
+│   ├── Mini_Projects/      # 周任务项目（强制英文README）
+│   │   ├── Week1_Data_Clean_Tool/
+│   │   └── Week2_AI_Dashboard/
+│   └── Final_Showcase/     # 求职作品（含Demo视频）
+│
+├── 3_Resources/            # 精选资源
+│   ├── Books/              # 电子书（Python+AI领域）
+│   ├── Cheatsheets/        # 速查表（PyTorch/Vue3）
+│   └── Interview/          # 面试题库（按公司分类）
+│
+├── docs/                   # 文档中心
+│   ├── Learning_Roadmap.md # 动态更新学习路线
+│   └── Tech_Glossary.md    # 技术术语中英对照表
+│
+└── .git-hooks/             # 自动化规范
+    ├── pre-commit          # 代码提交前检查（flake8+ESLint）
+    └── commit-msg          # 强制英文提交信息
