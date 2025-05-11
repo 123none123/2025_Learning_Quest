@@ -1,0 +1,739 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Python??}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Python教程}\label{pythonux6559ux7a0b}
+
+    \subsection{10.
+面向对象编程}\label{ux9762ux5411ux5bf9ux8c61ux7f16ux7a0b}
+
+\#\#\# 类和实例
+面向对象最重要的概念就是类（Class）和实例（Instance），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的``对象''，每个对象都拥有相同的方法，但各自的数据可能不同。
+
+\#\#\#\# 1. 类的定义：
+
+\begin{verbatim}
+  class 类名(继承类)
+  继承类默认为object
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+\end{Verbatim}
+
+
+    \#\#\#\# 2. 创建类的实例：
+
+\begin{verbatim}
+   类名+()
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{stu} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{verbatim}
+可以自由给实例绑定属性
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{stu}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ljx}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{stu}\PY{o}{.}\PY{n}{name}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ljx
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:}     \PY{n}{stu}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ljx}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{stu}\PY{o}{.}\PY{n}{name}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ljx
+
+    \end{Verbatim}
+
+    \begin{verbatim}
+1. 由于类起到模板的作用，所以在创建实例时就要绑定类必要的属性。
+2. 绑定的方式是类自带的__init__方法。
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{name}\PY{p}{,}\PY{n}{score}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{n}{name}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{score} \PY{o}{=} \PY{n}{score}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:}     \PY{n}{stu}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ljx}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{stu}\PY{o}{.}\PY{n}{name}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ljx
+
+    \end{Verbatim}
+
+    \begin{verbatim}
+1. __init__ 方法的第一个参数self：表示创建实例本身。因此将属性绑定在self上就是绑定在实例本身
+2. 有了__init__方法，就不能传空的参数，必须传入与__init__方法匹配的参数，但self不需要传，python解析器自己会自动把变量实例传进去
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{stu2} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cara}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{stu2}\PY{o}{.}\PY{n}{name}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{stu2}\PY{o}{.}\PY{n}{score}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+cara
+100
+
+    \end{Verbatim}
+
+    \begin{verbatim}
+与普通函数不同，类内部定义的函数第一个参数需要是self,但调用函数是不需要传入self
+\end{verbatim}
+
+    \subsubsection{数据封装}\label{ux6570ux636eux5c01ux88c5}
+
+\begin{verbatim}
+面向对象编程一个重要特点就是数据封装。
+在类的内部定义访问类的属性数据的函数就是类的方法。在类的内部定义访问数据的方法就把数据封装起来了。
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{name}\PY{p}{,}\PY{n}{score}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{n}{name}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{score} \PY{o}{=} \PY{n}{score}
+                
+            \PY{k}{def} \PY{n+nf}{print\PYZus{}score}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{:}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}}\PY{p}{(} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{score}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{stu3} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{)}
+        \PY{n}{stu3}\PY{o}{.}\PY{n}{print\PYZus{}score}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a:200
+
+    \end{Verbatim}
+
+    类是创建实例的模板，而实例则是一个一个具体的对象，各个实例拥有的数据都互相独立，互不影响；
+
+方法就是与实例绑定的函数，和普通函数不同，方法可以直接访问实例的数据；
+
+通过在实例上调用方法，我们就直接操作了对象内部的数据，但无需知道方法内部的实现细节。
+
+和静态语言不同，Python允许对实例变量绑定任何数据，也就是说，对于两个实例变量，虽然它们都是同一个类的不同实例，但拥有的变量名称都可能不同：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{o}{\PYZgt{}\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{bart} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bart Simpson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{59}\PY{p}{)}
+         \PY{o}{\PYZgt{}\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{lisa} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lisa Simpson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{87}\PY{p}{)}
+         \PY{o}{\PYZgt{}\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{bart}\PY{o}{.}\PY{n}{age} \PY{o}{=} \PY{l+m+mi}{8}
+         \PY{o}{\PYZgt{}\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{bart}\PY{o}{.}\PY{n}{age}
+         \PY{l+m+mi}{8}
+         \PY{o}{\PYZgt{}\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{lisa}\PY{o}{.}\PY{n}{age}
+         \PY{n}{Traceback} \PY{p}{(}\PY{n}{most} \PY{n}{recent} \PY{n}{call} \PY{n}{last}\PY{p}{)}\PY{p}{:}
+           \PY{n}{File} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}stdin\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{line} \PY{l+m+mi}{1}\PY{p}{,} \PY{o+ow}{in} \PY{o}{\PYZlt{}}\PY{n}{module}\PY{o}{\PYZgt{}}
+         \PY{n+ne}{AttributeError}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student}\PY{l+s+s1}{\PYZsq{}} \PY{n+nb}{object} \PY{n}{has} \PY{n}{no} \PY{n}{attribute} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+          File "<ipython-input-10-c3e2e6e2b5a1>", line 7
+        Traceback (most recent call last):
+                             \^{}
+    SyntaxError: invalid syntax
+    
+
+    \end{Verbatim}
+
+    \subsection{11.
+面向对象高级编程}\label{ux9762ux5411ux5bf9ux8c61ux9ad8ux7ea7ux7f16ux7a0b}
+
+\subsubsection{11.1 使用\_\_slot\_\_
+前一节说过，python作为动态语言。可以自由的给实例绑定实例和方法。}\label{ux4f7fux7528__slot__-ux524dux4e00ux8282ux8bf4ux8fc7pythonux4f5cux4e3aux52a8ux6001ux8bedux8a00ux53efux4ee5ux81eaux7531ux7684ux7ed9ux5b9eux4f8bux7ed1ux5b9aux5b9eux4f8bux548cux65b9ux6cd5}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{Animal}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+        
+        \PY{c+c1}{\PYZsh{} 动态添加属性}
+        \PY{n}{dog} \PY{o}{=} \PY{n}{Animal}\PY{p}{(}\PY{p}{)}
+        \PY{n}{dog}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{money}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{dog}\PY{o}{.}\PY{n}{name}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{set\PYZus{}food}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{amount}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{amount:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{amount}\PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{} 给单个实例动态绑定方法}
+        \PY{k+kn}{from} \PY{n+nn}{types} \PY{k}{import} \PY{n}{MethodType}
+        \PY{n}{dog}\PY{o}{.}\PY{n}{set\PYZus{}food} \PY{o}{=} \PY{n}{MethodType}\PY{p}{(}\PY{n}{set\PYZus{}food}\PY{p}{,}\PY{n}{dog}\PY{p}{)}
+        \PY{n}{dog}\PY{o}{.}\PY{n}{set\PYZus{}food}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{)}
+\end{Verbatim}
+
+
+    但是，给一个实例绑定的方法，对另一个实例是不起作用的：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZgt{}\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{s2} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} 创建新的实例}
+        \PY{o}{\PYZgt{}\PYZgt{}}\PY{o}{\PYZgt{}} \PY{n}{s2}\PY{o}{.}\PY{n}{set\PYZus{}age}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{)} \PY{c+c1}{\PYZsh{} 尝试调用方法}
+        \PY{n}{Traceback} \PY{p}{(}\PY{n}{most} \PY{n}{recent} \PY{n}{call} \PY{n}{last}\PY{p}{)}\PY{p}{:}
+          \PY{n}{File} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}stdin\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{line} \PY{l+m+mi}{1}\PY{p}{,} \PY{o+ow}{in} \PY{o}{\PYZlt{}}\PY{n}{module}\PY{o}{\PYZgt{}}
+        \PY{n+ne}{AttributeError}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Student}\PY{l+s+s1}{\PYZsq{}} \PY{n+nb}{object} \PY{n}{has} \PY{n}{no} \PY{n}{attribute} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set\PYZus{}age}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    可以通过给类绑定方法，这样，每个实例也绑定了方法
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{Animal}\PY{o}{.}\PY{n}{set\PYZus{}food} \PY{o}{=} \PY{n}{set\PYZus{}food}
+        
+        \PY{n}{cat} \PY{o}{=} \PY{n}{Animal}\PY{p}{(}\PY{p}{)}
+        \PY{n}{cat}\PY{o}{.}\PY{n}{set\PYZus{}food}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{使用\_\_slots\_\_
+限制class能添加的属性}\label{ux4f7fux7528__slots__-ux9650ux5236classux80fdux6dfbux52a0ux7684ux5c5eux6027}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{People}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{n+nv+vm}{\PYZus{}\PYZus{}slots\PYZus{}\PYZus{}} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}使用tuple定义允许添加的属性}
+            
+        \PY{n}{p} \PY{o}{=} \PY{n}{People}\PY{p}{(}\PY{p}{)}
+        \PY{n}{p}\PY{o}{.}\PY{n}{job} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{teacher}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{p}\PY{o}{.}\PY{n}{job}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{p}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cici}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{p}\PY{o}{.}\PY{n}{name}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{注意}：
+使用的\_\_slots\_\_限制仅对类本身有作用，对于继承的子类不起作用
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{Cat}\PY{p}{(}\PY{n}{Animal}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+        
+        \PY{n}{c} \PY{o}{=} \PY{n}{Cat}\PY{p}{(}\PY{p}{)}
+        \PY{n}{c}\PY{o}{.}\PY{n}{age} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{o}{.}\PY{n}{age}\PY{p}{)}
+\end{Verbatim}
+
+
+    如果子类也定义\_\_slot\_\_,那么子类的属性就会变得也受限制，能够添加的属性是子类限制的属性加上父类限制的属性
+
+    \subsubsection{使用@property}\label{ux4f7fux7528property}
+
+将属性的读写操作直接用一个方法实行来完成。@property将这个方法的操作性质变成属性来使用。使得属性不用暴露于外部，并能够给属性添加逻辑检查。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} 一般逻辑，使用set和get方法读写属性的值}
+        \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+        
+            \PY{k}{def} \PY{n+nf}{set\PYZus{}age}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{age}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{age} \PY{o}{=} \PY{n}{age}
+                \PY{c+c1}{\PYZsh{} 逻辑检查}
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{age} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{error age:}\PY{l+s+si}{\PYZob{}self.age\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}age}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{age}
+        
+        \PY{n}{s} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s}\PY{o}{.}\PY{n}{set\PYZus{}age}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{age} \PY{o}{=} \PY{n}{s}\PY{o}{.}\PY{n}{get\PYZus{}age}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{age}\PY{p}{)}
+        
+        \PY{n}{s1} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s1}\PY{o}{.}\PY{n}{set\PYZus{}age}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} 使用@property}
+        
+        \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} 使用@property，将getter方法变成属性}
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{age}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}age}
+            
+            \PY{c+c1}{\PYZsh{} 同时@property自己会创建方法属性的setter装饰器，负责把setter方法变成属性}
+            \PY{n+nd}{@age}\PY{o}{.}\PY{n}{setter}
+            \PY{k}{def} \PY{n+nf}{age}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{age}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}age} \PY{o}{=} \PY{n}{age}
+                
+        \PY{n}{s1} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s1}\PY{o}{.}\PY{n}{age} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{age} \PY{o}{=} \PY{n}{s1}\PY{o}{.}\PY{n}{age}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{age}\PY{p}{)}
+\end{Verbatim}
+
+
+    只定义@property，那么属性只可读不可写，同时定义@age.setter，那么属性可读可写
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+        
+            \PY{c+c1}{\PYZsh{} usual\PYZus{}score 只可写？}
+            \PY{n+nd}{@usual\PYZus{}score}\PY{o}{.}\PY{n}{setter}
+            \PY{k}{def} \PY{n+nf}{usual\PYZus{}score}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{value}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}usual\PYZus{}score} \PY{o}{=} \PY{n}{value}
+            
+            \PY{c+c1}{\PYZsh{} final\PYZus{}score 可读可写}
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{final\PYZus{}score}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}final\PYZus{}score}
+            
+            \PY{n+nd}{@final\PYZus{}score}\PY{o}{.}\PY{n}{setter}
+            \PY{k}{def} \PY{n+nf}{final\PYZus{}score}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{value}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}final\PYZus{}score} \PY{o}{=} \PY{n}{value}
+            
+            \PY{c+c1}{\PYZsh{} total\PYZus{}score 只可读}
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{total\PYZus{}score}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}usual\PYZus{}score}\PY{o}{*}\PY{l+m+mf}{0.5} \PY{o}{+} \PY{n}{\PYZus{}final\PYZus{}score}\PY{o}{*}\PY{l+m+mf}{0.5}
+            
+        \PY{n}{s3} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s3}\PY{o}{.}\PY{n}{usual\PYZus{}score} \PY{o}{=} \PY{l+m+mi}{90}
+        \PY{n}{u\PYZus{}score} \PY{o}{=} \PY{n}{s3}\PY{o}{.}\PY{n}{usual\PYZus{}score}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{u\PYZus{}score}\PY{p}{)}
+        
+        \PY{n}{s3}\PY{o}{.}\PY{n}{final\PYZus{}score} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{f\PYZus{}score} \PY{o}{=} \PY{n}{s3}\PY{o}{.}\PY{n}{final\PYZus{}score}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f\PYZus{}score}\PY{p}{)}
+        
+        \PY{n}{t\PYZus{}score} \PY{o}{=} \PY{n}{s3}\PY{o}{.}\PY{n}{total\PYZus{}score}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{t\PYZus{}score}\PY{p}{)}
+\end{Verbatim}
+
+
+    以上，需要定义@property后才能定义@usual\_score.setter
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+        
+            \PY{c+c1}{\PYZsh{} usual\PYZus{}score 可度写}
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{usual\PYZus{}score}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}usual\PYZus{}score}
+                
+            \PY{n+nd}{@usual\PYZus{}score}\PY{o}{.}\PY{n}{setter}
+            \PY{k}{def} \PY{n+nf}{usual\PYZus{}score}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{value}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}usual\PYZus{}score} \PY{o}{=} \PY{n}{value}
+            
+            \PY{c+c1}{\PYZsh{} final\PYZus{}score 可读可写}
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{final\PYZus{}score}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}final\PYZus{}score}
+            
+            \PY{n+nd}{@final\PYZus{}score}\PY{o}{.}\PY{n}{setter}
+            \PY{k}{def} \PY{n+nf}{final\PYZus{}score}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{value}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}final\PYZus{}score} \PY{o}{=} \PY{n}{value}
+            
+            \PY{c+c1}{\PYZsh{} total\PYZus{}score 只可读}
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{total\PYZus{}score}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}usual\PYZus{}score}\PY{o}{*}\PY{l+m+mf}{0.5} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}final\PYZus{}score}\PY{o}{*}\PY{l+m+mf}{0.5}
+            
+        \PY{n}{s3} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s3}\PY{o}{.}\PY{n}{usual\PYZus{}score} \PY{o}{=} \PY{l+m+mi}{90}
+        \PY{n}{u\PYZus{}score} \PY{o}{=} \PY{n}{s3}\PY{o}{.}\PY{n}{usual\PYZus{}score}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{u\PYZus{}score}\PY{p}{)}
+        
+        \PY{n}{s3}\PY{o}{.}\PY{n}{final\PYZus{}score} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{f\PYZus{}score} \PY{o}{=} \PY{n}{s3}\PY{o}{.}\PY{n}{final\PYZus{}score}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f\PYZus{}score}\PY{p}{)}
+        
+        \PY{n}{t\PYZus{}score} \PY{o}{=} \PY{n}{s3}\PY{o}{.}\PY{n}{total\PYZus{}score}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{t\PYZus{}score}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}自定义total\PYZus{}score}
+        \PY{n}{s3}\PY{o}{.}\PY{n}{total\PYZus{}score} \PY{o}{=} \PY{l+m+mi}{1000}
+        \PY{n}{test} \PY{o}{=} \PY{n}{s3}\PY{o}{.}\PY{n}{total\PYZus{}score}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} \PYZgt{}\PYZgt{}AttributeError: can\PYZsq{}t set attribute}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}方法名和属性名重名}
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{age}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{age}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} 方法名称和实例变量均为birth:}
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{birth}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{birth}
+        
+        \PY{n}{s} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s}\PY{o}{.}\PY{n}{age} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{age}\PY{p}{)}
+\end{Verbatim}
+
+
+    **注意
+
+属性方法名和实例变量重名，会造成递归调用，导致栈溢出报错.
+但是以上代码为什么没有这个错误。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{Screen}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{width}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}width}
+            
+            \PY{n+nd}{@width}\PY{o}{.}\PY{n}{setter}
+            \PY{k}{def} \PY{n+nf}{width}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{value}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}width} \PY{o}{=} \PY{n}{value}
+                
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{height}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}height}
+            
+            \PY{n+nd}{@height}\PY{o}{.}\PY{n}{setter}
+            \PY{k}{def} \PY{n+nf}{height}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{value}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}height} \PY{o}{=} \PY{n}{value}
+                
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{resolution}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}height} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}width}
+            
+        \PY{n}{s} \PY{o}{=} \PY{n}{Screen}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s}\PY{o}{.}\PY{n}{height} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{s}\PY{o}{.}\PY{n}{width} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{resolution}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} 测试:}
+        \PY{n}{s1} \PY{o}{=} \PY{n}{Screen}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s1}\PY{o}{.}\PY{n}{width} \PY{o}{=} \PY{l+m+mi}{1024}
+        \PY{n}{s1}\PY{o}{.}\PY{n}{height} \PY{o}{=} \PY{l+m+mi}{768}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{resolution =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s1}\PY{o}{.}\PY{n}{resolution}\PY{p}{)}
+        \PY{k}{if} \PY{n}{s1}\PY{o}{.}\PY{n}{resolution} \PY{o}{==} \PY{l+m+mi}{786432}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{测试通过!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{测试失败!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
